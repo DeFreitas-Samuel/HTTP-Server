@@ -8,17 +8,15 @@ import (
 
 func helloWorldFunc(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Request Received")
-	fmt.Fprintf(w, "Hello World Hola Mundo!")
+	fmt.Fprintf(w, "Hola Mundo!")
 
 }
 func formHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Request Received")
+	fmt.Fprintf(w, "POST successful")
+	message := r.FormValue("message")
 
-	fmt.Fprintf(w, "POST request successful")
-	name := r.FormValue("name")
-	address := r.FormValue("address")
-
-	fmt.Fprintf(w, "Name = %s\n", name)
-	fmt.Fprintf(w, "Address = %s\n", address)
+	fmt.Fprintf(w, "Message = %s\n", message)
 }
 
 func main() {
