@@ -55,14 +55,18 @@ func helloWorldFunc2(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			fmt.Fprintf(w, "ParseForm() err: %v", err)
 		}
-		fmt.Printf(split[2])
 		putMessage := r.FormValue("putMessage")
 		fmt.Fprintf(w, "putMessage = %s\n", putMessage)
 		Messages[valueToEdit] = putMessage
 
 	case "DELETE":
-		fmt.Fprintf(w, "No implemented yet")
-
+		URL := (r.URL.Path)
+		split := strings.Split(URL, "/")
+		valueToEdit, err := strconv.ParseInt(split[2], 10, 64)
+		if err != nil {
+			fmt.Fprintf(w, "ParseForm() err: %v", err)
+		}
+		Messages[valueToEdit] = ""
 	default:
 		fmt.Fprintf(w, "This URL only suports PUT and DELETE methods")
 	}
